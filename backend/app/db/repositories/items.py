@@ -3,8 +3,7 @@ from typing import List, Optional, Sequence, Union
 from asyncpg import Connection, Record
 from pypika import Query, Order
 
-#import os
-#import openai
+import openai
 
 from app.db.errors import EntityDoesNotExist
 from app.db.queries.queries import queries
@@ -27,8 +26,6 @@ SLUG_ALIAS = "slug"
 
 CAMEL_OR_SNAKE_CASE_TO_WORDS = r"^[a-z\d_\-]+|[A-Z\d_\-][^A-Z\d_\-]*"
 
-#openai.api_key = os.getenv("OPENAI_API_KEY")
-
 class ItemsRepository(BaseRepository):  # noqa: WPS214
     def __init__(self, conn: Connection) -> None:
         super().__init__(conn)
@@ -46,13 +43,13 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
         image: Optional[str] = None,
         tags: Optional[Sequence[str]] = None,
     ) -> Item:
-#        if not image:
-#            openai_response = openai.Image.create(
-#                prompt=title,
-#                n=1,
-#                size="256x256"
-#            )
-#            image = openai_response['data'][0]['url']
+        if not image:
+            openai_response = openai.Image.create(
+                prompt=title,
+                n=1,
+                size="256x256"
+            )
+            image = openai_response['data'][0]['url']
 
         async with self.connection.transaction():
             item_row = await queries.create_new_item(
