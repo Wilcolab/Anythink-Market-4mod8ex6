@@ -12,6 +12,7 @@ import Profile from "./Profile";
 import ProfileFavorites from "./ProfileFavorites";
 import Register from "./Register";
 import Settings from "./Settings";
+import PrivateRoute from "./PrivateRoute";
 import { store } from "../store";
 import { push } from "react-router-redux";
 
@@ -60,7 +61,7 @@ class App extends React.Component {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
-            <Route path="/editor/:slug" component={Editor} />
+            <PrivateRoute path="/editor/:slug" component={Editor} currentUser={this.props.currentUser} />
             <Route path="/editor" component={Editor} />
             <Route path="/item/:id" component={Item} />
             <Route path="/settings" component={Settings} />
