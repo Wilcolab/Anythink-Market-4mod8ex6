@@ -6,5 +6,5 @@ function Message() {
 }
 
 export default function PrivateRoute({ currentUser, component, ...rest }) {
-    return <Route {...rest} component={currentUser.isAuthenticated ? component : Message} />;
+    return <Route {...rest} component={currentUser ? component : Message} />;
 }
