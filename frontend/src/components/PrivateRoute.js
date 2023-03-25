@@ -1,10 +1,10 @@
 import React from "react"
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 
-function Message() {
-    return <div><h1>This is a private page</h1></div>
+function Redirector() {
+    return <Redirect to={{ pathname: "/login" }} />
 }
 
 export default function PrivateRoute({ currentUser, component, ...rest }) {
-    return <Route {...rest} component={currentUser ? component : Message} />;
+    return <Route {...rest} component={currentUser ? component : Redirector} />;
 }
